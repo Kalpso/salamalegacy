@@ -1,9 +1,0 @@
-{
-  "name": "Salama Legacy Centre",
-  "description": "Premier Research, Training, Consultancy, and Innovation Institute in Salama Town, Makueni County, Kenya. Service with Dignity is Our Hallmark.",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}
-
