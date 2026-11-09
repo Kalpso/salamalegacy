@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
-import { X, Calendar, Clock, User, Share2, MessageCircle, Mail, BookOpen, Tag } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, Calendar, Clock, User, Share2, MessageCircle, Mail, BookOpen, Tag, Check } from 'lucide-react';
 import { BlogItem, buildWhatsAppLink, buildEmailLink } from '../utils/contentStore';
 import { Language } from '../constants/translations';
 
@@ -15,6 +15,7 @@ interface BlogReaderModalProps {
 }
 
 export const BlogReaderModal: React.FC<BlogReaderModalProps> = ({ blog, onClose, lang }) => {
+  const [copied, setCopied] = useState(false);
   if (!blog) return null;
 
   const waLink = buildWhatsAppLink(
@@ -168,13 +169,25 @@ export const BlogReaderModal: React.FC<BlogReaderModalProps> = ({ blog, onClose,
                     }).catch(() => {});
                   } else {
                     navigator.clipboard.writeText(`${blog.title} - Read on Salama Legacy Centre: ${window.location.href}`);
-                    alert(lang === 'en' ? 'Article link copied to clipboard!' : 'Kiungo cha makala kimenakiliwa!');
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2500);
                   }
                 }}
                 className="inline-flex items-center gap-1.5 bg-white/10 hover:bg-white/20 text-white font-medium px-3.5 py-2.5 rounded-lg text-xs transition-colors cursor-pointer"
               >
-                <Share2 className="w-3.5 h-3.5 text-[#E5BE42]" />
-                <span>{lang === 'en' ? 'Share Article' : 'Sambaza'}</span>
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <span className="text-emerald-300 font-semibold">
+                      {lang === 'en' ? 'Link Copied!' : 'Kimenakiliwa!'}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-3.5 h-3.5 text-[#E5BE42]" />
+                    <span>{lang === 'en' ? 'Share Article' : 'Sambaza'}</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

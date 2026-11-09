@@ -231,7 +231,7 @@ export default function App() {
   const handleFeedbackSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!feedbackConsent) {
-      alert(lang === 'en' ? 'Please check the consent box to submit.' : 'Tafadhali weka alama kwenye kisanduku cha idhini.');
+      setFeedbackStatus('error');
       return;
     }
     setFeedbackStatus('sending');

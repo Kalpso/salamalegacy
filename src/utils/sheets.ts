@@ -15,17 +15,9 @@ export const SHEETS = {
   feedback: '',
 };
 
-/**
- * Escape text for safe rendering (anti-XSS)
- */
 export function escapeText(text: string): string {
   if (!text) return '';
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+  return text.trim();
 }
 
 /**
